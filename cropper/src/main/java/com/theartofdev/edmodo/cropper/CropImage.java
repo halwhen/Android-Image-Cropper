@@ -343,10 +343,12 @@ public final class CropImage {
   public static Uri getCaptureImageOutputUri(@NonNull Context context) {
     Uri outputFileUri = null;
     File getImage = context.getExternalCacheDir();
+    Log.e("HAO", "******** Hao "+getImage);
     if (getImage != null) {
       File pickImageFile = new File(getImage.getPath(), "pickImageResult.jpeg");
       outputFileUri = FileProvider.getUriForFile(context, context.getPackageName() + ".fileprovider", pickImageFile);
     }
+    Log.e("HAO", "******** Hao "+outputFileUri);
     return outputFileUri;
   }
 
