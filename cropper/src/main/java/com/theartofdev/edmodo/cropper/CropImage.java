@@ -181,6 +181,7 @@ public final class CropImage {
       CharSequence title,
       boolean includeDocuments,
       boolean includeCamera) {
+    Log.e("HAO", "getPickImageChooserIntent ");
 
     List<Intent> allIntents = new ArrayList<>();
     PackageManager packageManager = context.getPackageManager();
@@ -228,6 +229,7 @@ public final class CropImage {
    */
   public static Intent getCameraIntent(@NonNull Context context, Uri outputFileUri) {
     Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+    Log.e("HAO", "getCameraIntent Context = "+context+" Uri = "+outputFileUri);
     if (outputFileUri == null) {
       outputFileUri = getCaptureImageOutputUri(context);
     }
@@ -243,6 +245,7 @@ public final class CropImage {
 
     // Determine Uri of camera image to  save.
     Uri outputFileUri = getCaptureImageOutputUri(context);
+    Log.e("HAO", "getCameraIntents outputFileUri = "+outputFileUri);
 
     Intent captureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
     List<ResolveInfo> listCam = packageManager.queryIntentActivities(captureIntent, 0);
@@ -253,6 +256,7 @@ public final class CropImage {
       if (outputFileUri != null) {
         intent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
       }
+      Log.e("HAO", "getCameraIntents = "+intent);
       allIntents.add(intent);
     }
 
@@ -343,12 +347,12 @@ public final class CropImage {
   public static Uri getCaptureImageOutputUri(@NonNull Context context) {
     Uri outputFileUri = null;
     File getImage = context.getExternalCacheDir();
-    Log.e("HAO", "******** Hao "+getImage);
+    Log.e("HAO", "getCaptureImageOutputUri context = "+context+" getImage = "+getImage);
     if (getImage != null) {
       File pickImageFile = new File(getImage.getPath(), "pickImageResult.jpeg");
       outputFileUri = FileProvider.getUriForFile(context, context.getPackageName() + ".fileprovider", pickImageFile);
     }
-    Log.e("HAO", "******** Hao "+outputFileUri);
+    Log.e("HAO", "******** Hao outputFileUri = "+outputFileUri);
     return outputFileUri;
   }
 
@@ -366,6 +370,7 @@ public final class CropImage {
       String action = data.getAction();
       isCamera = action != null && action.equals(MediaStore.ACTION_IMAGE_CAPTURE);
     }
+    Log.e("HAO", "getPickImageResultUri isCamera = "+isCamera+" data.getData = "+data.getData());
     return isCamera || data.getData() == null ? getCaptureImageOutputUri(context) : data.getData();
   }
 
