@@ -8,7 +8,7 @@ android {
     compileSdkVersion rootProject.compileSdkVersion
     buildToolsVersion rootProject.buildToolsVersion
     defaultConfig {
-        minSdkVersion 24
+        minSdkVersion 14
         targetSdkVersion rootProject.compileSdkVersion
         versionCode 1
         versionName PUBLISH_VERSION
@@ -42,7 +42,7 @@ publishing {
 apply from: 'https://raw.githubusercontent.com/blundell/release-android-library/master/android-release-aar.gradle'
 
 dependencies {
-    api "androidx.appcompat:appcompat:$androidXAppCompatVersion"
-    implementation "androidx.exifinterface:exifinterface:$androidXLibraryVersion"
+    api "androidx.appcompat:appcompat:$androidXLibraryVersion"
+    implementation "androidx.exifinterface:exifinterface:$androidXExifVersion"
 }
 
